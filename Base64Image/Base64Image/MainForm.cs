@@ -98,7 +98,21 @@ namespace Base64Image
 
         private void link_save_img_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (picture_box.Image == null)
+            Bitmap imageBitMap = null;
+
+            string base64 = text_base64_box.Text;
+            if (!String.IsNullOrEmpty(base64))
+            {
+                // 优先保存base64原图
+                imageBitMap = ImageBase64Utils.toImage(base64);
+            }
+            else if (picture_box.Image != null) {
+                // 其次保存pic控件上的图
+                imageBitMap = new Bitmap(picture_box.ClientRectangle.Width, picture_box.ClientRectangle.Height);
+                picture_box.DrawToBitmap(imageBitMap, picture_box.ClientRectangle);
+            }
+
+            if (imageBitMap == null)
             {
                 MessageBox.Show("没有图片可以保存。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -110,10 +124,15 @@ namespace Base64Image
 
             if (save.ShowDialog() == DialogResult.OK)
             {
-                Bitmap bit = new Bitmap(picture_box.ClientRectangle.Width, picture_box.ClientRectangle.Height);
-                picture_box.DrawToBitmap(bit, picture_box.ClientRectangle);
-                bit.Save(save.FileName);
+                //GDI+ 中发生一般性错误解决方案：将imageBitMap拷贝到tempBitmap中
+                Bitmap tempBitmap = new Bitmap(imageBitMap.Width, imageBitMap.Height);
+                Graphics draw = Graphics.FromImage(tempBitmap);
+                draw.DrawImage(imageBitMap, 0, 0);
+                save.Dispose();
+                draw.Dispose();
+                imageBitMap.Dispose();
 
+                tempBitmap.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg); 
                 setStatusText("图片已保存——>" + save.FileName);
             }
         }

@@ -39,6 +39,7 @@
             this.tb_status = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.link_save_img = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picture_box)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,7 +112,7 @@
             this.link_save_base64.AutoSize = true;
             this.link_save_base64.Location = new System.Drawing.Point(360, 18);
             this.link_save_base64.Name = "link_save_base64";
-            this.link_save_base64.Size = new System.Drawing.Size(65, 12);
+            this.link_save_base64.Size = new System.Drawing.Size(67, 12);
             this.link_save_base64.TabIndex = 6;
             this.link_save_base64.TabStop = true;
             this.link_save_base64.Text = "保存BASE64";
@@ -155,11 +156,21 @@
             this.link_save_img.Text = "保存图片";
             this.link_save_img.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_save_img_LinkClicked);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(582, 169);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "预览-缩略图";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 332);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.link_save_img);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_status);
@@ -195,6 +206,7 @@
         private System.Windows.Forms.TextBox tb_status;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel link_save_img;
+        private System.Windows.Forms.Label label2;
     }
 }
 
